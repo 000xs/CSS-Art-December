@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Snow Globe</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="snow-globe">
+      <div class="globe">
+        <div class="snow-base"></div>
+        <div class="snowman">
+          <div class="snowman-body"></div>
+          <div class="snowman-middle"></div>
+          <div class="snowman-head">
+            <div class="snowman-eye left"></div>
+            <div class="snowman-eye right"></div>
+            <div class="snowman-nose"></div>
+          </div>
+          <div class="scarf"></div>
+        </div>
+        <div class="tree">
+          <div class="tree-part"></div>
+          <div class="tree-part"></div>
+          <div class="tree-part"></div>
+        </div>
+        <div class="tree">
+          <div class="tree-part"></div>
+          <div class="tree-part"></div>
+          <div class="tree-part"></div>
+        </div>
+        <div class="tree">
+          <div class="tree-part"></div>
+          <div class="tree-part"></div>
+          <div class="tree-part"></div>
+        </div>
+        <div class="tree">
+          <div class="tree-part"></div>
+          <div class="tree-part"></div>
+          <div class="tree-part"></div>
+        </div>
+        <!-- Snow particles -->
+        <div class="snow"></div>
+        <div class="snow"></div>
+        <div class="snow"></div>
+        <div class="snow"></div>
+        <div class="snow"></div>
+        <div class="snow"></div>
+        <div class="snow"></div>
+        <div class="snow"></div>
+        <div class="snow"></div>
+        <div class="snow"></div>
+        <!-- Add this inside the globe div, after the trees -->
+        <div class="gifts-container">
+          <div class="gift" style="left: 30px; bottom: -10px">
+            <div class="gift-box">
+              <div class="gift-lid"></div>
+              <div class="gift-ribbon"></div>
+              <div class="gift-stripe"></div>
+              <div class="gift-stripe-vertical"></div>
+            </div>
+          </div>
+          <div class="gift" style="left: 70px; transform: scale(0.8)">
+            <div
+              class="gift-box"
+              style="
+                background: linear-gradient(135deg, #44aaff 0%, #2288dd 100%);
+              "
+            >
+              <div
+                class="gift-lid"
+                style="
+                  background: linear-gradient(135deg, #55bbff 0%, #3399ee 100%);
+                "
+              ></div>
+              <div class="gift-ribbon" style="background: #ff3366"></div>
+              <div class="gift-stripe" style="background: #ff3366"></div>
+              <div
+                class="gift-stripe-vertical"
+                style="background: #ff3366"
+              ></div>
+            </div>
+          </div>
+          <div class="gift" style="right: 40px; transform: scale(0.9); bottom: -10px">
+            <div
+              class="gift-box"
+              style="
+                background: linear-gradient(135deg, #66dd88 0%, #44bb66 100%);
+              "
+            >
+              <div
+                class="gift-lid"
+                style="
+                  background: linear-gradient(135deg, #77ee99 0%, #55cc77 100%);
+                "
+              ></div>
+              <div class="gift-ribbon" style="background: #ffffff"></div>
+              <div class="gift-stripe" style="background: #ffffff"></div>
+              <div
+                class="gift-stripe-vertical"
+                style="background: #ffffff"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ring"></div>
+      <div class="base"></div>
+    </div>
+    <script>
+      // Add this script after the existing scripts
+      const snowGlobe = document.querySelector(".snow-globe");
+      const globe = document.querySelector(".globe");
+
+      snowGlobe.addEventListener("click", () => {
+        // Add storm class to enable storm mode
+        globe.classList.add("storm-mode");
+
+        // Get all snowflakes
+        const snowflakes = document.querySelectorAll(".snowflake");
+
+        // Add intense shake animation
+        globe.style.animation = "intense-shake 0.5s ease-in-out";
+
+        // Add wobble effect to gifts during storm
+        document.querySelectorAll(".gift").forEach((gift) => {
+          gift.style.animation = "intense-shake 0.5s ease-in-out";
+          setTimeout(() => {
+            gift.style.animation = `giftBounce ${
+              2 + Math.random()
+            }s ease-in-out infinite`;
+          }, 500);
+        });
+
+        // Storm effect for each snowflake
+        snowflakes.forEach((snowflake) => {
+          // Random intense movement
+          snowflake.style.animation = "storm 1.5s linear infinite";
+          snowflake.style.left = Math.random() * 200 + "%";
+          snowflake.style.animationDelay = Math.random() * 0.5 + "s";
+        });
+
+        // Create additional storm snowflakes
+        for (let i = 0; i < 20; i++) {
+          const stormFlake = document.createElement("div");
+          stormFlake.className = "snowflake storm-flake";
+          stormFlake.style.left = Math.random() * 100 + "%";
+          stormFlake.style.animationDelay = Math.random() * 0.5 + "s";
+          globe.appendChild(stormFlake);
+        }
+
+        // Reset after storm
+        setTimeout(() => {
+          globe.style.animation = "";
+          globe.classList.remove("storm-mode");
+
+          // Remove storm snowflakes
+          document
+            .querySelectorAll(".storm-flake")
+            .forEach((flake) => flake.remove());
+
+          // Reset regular snowflakes
+          snowflakes.forEach((snowflake) => {
+            snowflake.style.animation = `snowfall ${
+              Math.random() * 2 + 2
+            }s linear infinite`;
+            snowflake.style.animationDelay = Math.random() * 3 + "s";
+          });
+        }, 1500);
+      });
+
+      // Add these new keyframe animations to your existing styles
+      const stormStyles = document.createElement("style");
+      stormStyles.textContent = `
+          @keyframes intense-shake {
+              0%, 100% { transform: translateX(0) rotate(0); }
+              10% { transform: translateX(-10px) rotate(-5deg); }
+              20% { transform: translateX(10px) rotate(5deg); }
+              30% { transform: translateX(-8px) rotate(-4deg); }
+              40% { transform: translateX(8px) rotate(4deg); }
+              50% { transform: translateX(-6px) rotate(-3deg); }
+              60% { transform: translateX(6px) rotate(3deg); }
+              70% { transform: translateX(-4px) rotate(-2deg); }
+              80% { transform: translateX(4px) rotate(2deg); }
+              90% { transform: translateX(-2px) rotate(-1deg); }
+          }
+
+          @keyframes storm {
+              0% { 
+                  transform: translateY(-250px) translateX(-20px) rotate(0deg);
+                  opacity: 0;
+              }
+              10% {
+                  opacity: 1;
+              }
+              100% { 
+                  transform: translateY(250px) translateX(20px) rotate(720deg);
+                  opacity: 0.2;
+              }
+          }
+
+          .storm-mode .snowflake {
+              width: 6px !important;
+              height: 6px !important;
+              opacity: 0.8 !important;
+              filter: blur(1px) !important;
+          }
+
+          .storm-mode::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: radial-gradient(circle at center,
+                  rgba(255, 255, 255, 0.1) 0%,
+                  rgba(255, 255, 255, 0.2) 50%,
+                  rgba(255, 255, 255, 0.1) 100%);
+              border-radius: 50%;
+              animation: stormGlow 1.5s ease-in-out;
+          }
+
+          @keyframes stormGlow {
+              0%, 100% { opacity: 0; }
+              50% { opacity: 1; }
+          }
+
+          /* Add Christmas hat styles */
+          .christmas-hat {
+              position: absolute;
+              top: -25px;
+              left: 50%;
+              transform: translateX(-50%);
+              z-index: 2;
+          }
+
+          .hat-base {
+              position: relative;
+              width: 24px;
+              height: 8px;
+              background: #ff3333;
+              border-radius: 8px 8px 0 0;
+              box-shadow: 
+                  inset 0 2px 3px rgba(255, 255, 255, 0.4),
+                  0 -1px 3px rgba(0, 0, 0, 0.2);
+          }
+
+          .hat-body {
+              position: relative;
+              width: 20px;
+              height: 20px;
+              background: #ff3333;
+              clip-path: polygon(0 0, 100% 0, 50% 100%);
+              transform: translateY(-95%);
+              box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.4);
+          }
+
+          .hat-band {
+              position: absolute;
+              bottom: 0;
+              left: -2px;
+              width: 28px;
+              height: 4px;
+              background: #ffffff;
+              border-radius: 2px;
+              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+          }
+
+          .hat-pom {
+              position: absolute;
+              top: -8px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 10px;
+              height: 10px;
+              background: #ffffff;
+              border-radius: 50%;
+              box-shadow: 
+                  inset -2px -2px 4px rgba(0, 0, 0, 0.1),
+                  0 2px 4px rgba(0, 0, 0, 0.2);
+          }
+
+          /* Add hat animation */
+          @keyframes hatBob {
+              0%, 100% { transform: translateX(-50%) rotate(0deg); }
+              50% { transform: translateX(-50%) rotate(-5deg) translateY(-2px); }
+          }
+
+          .christmas-hat {
+              animation: hatBob 3s ease-in-out infinite;
+          }
+
+          /* Enhance hat during storm */
+          .storm-mode .christmas-hat {
+              animation: intense-shake 0.5s ease-in-out !important;
+          }
+      `;
+      document.head.appendChild(stormStyles);
+
+      // Add this to your existing JavaScript
+      document.querySelectorAll(".gift").forEach((gift, index) => {
+        // Add hover animation
+        gift.addEventListener("mouseenter", () => {
+          gift.style.animation = `giftBounce 0.5s ease-in-out infinite, giftGlow 1s ease-in-out infinite`;
+        });
+
+        gift.addEventListener("mouseleave", () => {
+          gift.style.animation = "";
+        });
+
+        // Add initial animation delay
+        gift.style.animation = `giftBounce ${
+          2 + index * 0.2
+        }s ease-in-out infinite`;
+        gift.style.animationDelay = `${index * 0.3}s`;
+      });
+    </script>
+  </body>
+</html>

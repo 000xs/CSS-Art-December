@@ -1,0 +1,373 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #a7c5df, #87ceeb);
+  font-family: Arial, sans-serif;
+}
+
+.snow-globe {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.globe {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(2px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4),
+    inset 0 0 50px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  left: 25px;
+}
+
+.base {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 60px;
+  background: linear-gradient(to bottom, #d4a66a, #c69455);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ring {
+  position: absolute;
+  z-index: 2;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 20px;
+  background: #c69455;
+  border-radius: 10px;
+  border-bottom: #4f3d33 solid 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.snow-base {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+  transform: translateY(40px);
+}
+
+.snowman {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.snowman-body {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.snowman-middle {
+  width: 45px;
+  height: 45px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.snowman-head {
+  width: 35px;
+  height: 35px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.snowman-nose {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 15px solid #ff6347;
+  transform: rotate(-90deg);
+}
+
+.snowman-eye {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: black;
+  border-radius: 50%;
+  top: 12px;
+}
+
+.snowman-eye.left {
+  left: 10px;
+}
+
+.snowman-eye.right {
+  right: 10px;
+}
+
+
+
+.tree {
+  position: absolute;
+  bottom: 40px;
+  width: 40px;
+  height: 80px;
+}
+
+.tree:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 15px;
+  background: #4f3d33;
+}
+
+.tree-part {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 25px solid #2d5a27;
+}
+
+.tree-part:nth-child(1) {
+  bottom: 10px;
+}
+
+.tree-part:nth-child(2) {
+  bottom: 25px;
+  width: 0;
+}
+
+.tree-part:nth-child(3) {
+  bottom: 40px;
+  width: 0;
+}
+
+.tree:nth-of-type(1) {
+  left: 40px;
+}
+
+.tree:nth-of-type(2) {
+  right: 30px;
+}
+
+.tree:nth-of-type(3) {
+  left: 50px;
+}
+
+.tree:nth-of-type(4) {
+  right: 50px;
+}
+
+.snow {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  animation: snowfall 3s linear infinite;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translate(0, -20px);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(0, 200px);
+    opacity: 0;
+  }
+}
+
+/* Generate multiple snowflakes with different positions and delays */
+.snow:nth-child(2n) {
+  left: 20%;
+  animation-delay: -1s;
+}
+
+.snow:nth-child(3n) {
+  left: 40%;
+  animation-delay: -2s;
+}
+
+.snow:nth-child(4n) {
+  left: 60%;
+  animation-delay: -1.5s;
+}
+
+.snow:nth-child(5n) {
+  left: 80%;
+  animation-delay: -2.5s;
+}
+
+.snow:nth-child(6n) {
+  left: 10%;
+  animation-delay: -0.5s;
+}
+
+.snow:nth-child(7n) {
+  left: 30%;
+  animation-delay: -1.8s;
+}
+
+.snow:nth-child(8n) {
+  left: 50%;
+  animation-delay: -2.3s;
+}
+
+.snow:nth-child(9n) {
+  left: 70%;
+  animation-delay: -0.8s;
+}
+
+.snow:nth-child(10n) {
+  left: 90%;
+  animation-delay: -1.3s;
+}
+
+/* Add hover effect */
+.snow-globe:hover .globe {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+
+  75% {
+    transform: translateX(5px) rotate(5deg);
+  }
+}
+
+/* Add gift styles */
+.gifts-container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  z-index: 2;
+
+  .gift {
+    position: absolute;
+    bottom: 0;
+    transform-origin: bottom;
+
+    .gift-box {
+      position: relative;
+      width: 25px;
+      height: 25px;
+      background: linear-gradient(135deg,
+          #ff3366 0%,
+          #ff0044 100%);
+      border-radius: 3px;
+      box-shadow:
+        -2px 2px 5px rgba(0, 0, 0, 0.2),
+        inset 2px -2px 5px rgba(255, 255, 255, 0.3);
+
+      .gift-lid {
+        position: absolute;
+        top: -5px;
+        left: -2px;
+        width: 29px;
+        height: 7px;
+        background: linear-gradient(135deg,
+            #ff4477 0%,
+            #ff1155 100%);
+        border-radius: 2px;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+
+        .gift-ribbon {
+          position: absolute;
+          top: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 6px;
+          height: 10px;
+          background: #ffcc00;
+          border-radius: 2px 2px 0 0;
+          box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1);
+
+          .gift-ribbon::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 6px;
+            background: #ffcc00;
+            border-radius: 50% 50% 0 0;
+
+            .gift-stripe {
+              position: absolute;
+              width: 100%;
+              height: 6px;
+              background: #ffcc00;
+              top: 50%;
+              transform: translateY(-50%);
+
+              .gift-stripe-vertical {
+                position: absolute;
+                width: 6px;
+                height: 100%;
+                background: #ffcc00;
+                left: 50%;
+                transform: translateX(-50%);
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
